@@ -272,6 +272,8 @@ struct MessagesView: View {
 }
 
 struct ProfileView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -280,20 +282,82 @@ struct ProfileView: View {
                         .font(AppTheme.Typography.displaySmall)
                         .foregroundColor(AppTheme.Colors.textPrimary)
 
+                    // User Profile Card
                     GlassCard {
                         VStack(spacing: AppTheme.Spacing.medium) {
-                            Circle()
-                                .fill(AppTheme.Colors.accent.opacity(0.3))
-                                .frame(width: 80, height: 80)
+                            // Avatar
+                            ZStack {
+                                Circle()
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [
+                                                AppTheme.Colors.accent.opacity(0.4),
+                                                AppTheme.Colors.primary.opacity(0.3)
+                                            ],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                                    .frame(width: 80, height: 80)
 
-                            Text("User Name")
+                                Image(systemName: authViewModel.currentUser?.isBusinessOwner == true ? "storefront.fill" : "person.fill")
+                                    .font(.system(size: 32))
+                                    .foregroundColor(.white)
+                            }
+
+                            // User Info
+                            Text(authViewModel.currentUser?.displayName ?? "User")
                                 .font(AppTheme.Typography.headlineSmall)
                                 .foregroundColor(AppTheme.Colors.textPrimary)
 
-                            Text("user@example.com")
+                            Text(authViewModel.currentUser?.email ?? "user@example.com")
                                 .font(AppTheme.Typography.bodyMedium)
                                 .foregroundColor(AppTheme.Colors.textSecondary)
+
+                            // Role Badge
+                            if let role = authViewModel.currentUser?.role {
+                                HStack(spacing: AppTheme.Spacing.xxSmall) {
+                                    Image(systemName: role == "business_owner" ? "storefront.fill" : "person.fill")
+                                        .font(.system(size: 12))
+                                    Text(role == "business_owner" ? "Business Owner" : "User")
+                                        .font(AppTheme.Typography.labelSmall)
+                                }
+                                .foregroundColor(AppTheme.Colors.accent)
+                                .padding(.horizontal, AppTheme.Spacing.medium)
+                                .padding(.vertical, AppTheme.Spacing.xSmall)
+                                .background(
+                                    Capsule()
+                                        .fill(AppTheme.Colors.accent.opacity(0.2))
+                                )
+                            }
                         }
+                        .padding(AppTheme.Spacing.medium)
+                    }
+
+                    // Settings/Options
+                    VStack(spacing: AppTheme.Spacing.medium) {
+                        // Edit Profile Button
+                        GlassButton(
+                            title: "Edit Profile",
+                            icon: "pencil",
+                            style: .secondary,
+                            action: {
+                                // TODO: Navigate to edit profile
+                            }
+                        )
+
+                        // Sign Out Button
+                        GlassButton(
+                            title: "Sign Out",
+                            icon: "arrow.right.square",
+                            style: .destructive,
+                            isLoading: authViewModel.isLoading,
+                            action: {
+                                Task {
+                                    await authViewModel.signOut()
+                                }
+                            }
+                        )
                     }
                 }
                 .padding()

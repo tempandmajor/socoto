@@ -33,13 +33,16 @@ final class SupabaseService {
     // MARK: - Authentication
 
     /// Sign up a new user with email and password
-    func signUp(email: String, password: String, fullName: String) async throws -> String {
+    func signUp(email: String, password: String, fullName: String, role: String = "user") async throws -> String {
         // TODO: Implement after adding Supabase package
         /*
         let response = try await client.auth.signUp(
             email: email,
             password: password,
-            data: ["full_name": fullName]
+            data: [
+                "full_name": fullName,
+                "role": role
+            ]
         )
         return response.user.id.uuidString
         */
