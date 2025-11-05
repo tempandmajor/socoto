@@ -38,6 +38,7 @@ All sensitive credentials are stored in the `.env` file which is:
 
 ✅ **Stripe Access Verified**
 - Account: Socoto (acct_1SQBLEPgqpwpKROa)
+- Publishable Key: Configured in `.env`
 
 ## iOS Configuration
 
