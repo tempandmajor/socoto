@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct SocotoApp: App {
+    init() {
+        // Validate configuration on app launch
+        let missingKeys = Config.validateConfiguration()
+        if !missingKeys.isEmpty {
+            print("⚠️ Warning: Missing configuration keys: \(missingKeys.joined(separator: ", "))")
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBarView()
+                .preferredColorScheme(.dark) // Force dark mode for glassmorphism effect
         }
     }
 }
