@@ -33,12 +33,19 @@ All sensitive credentials are stored in the `.env` file which is:
 
 ✅ **Supabase Access Verified**
 - Project: socoto (vvxtxhmcbmordfmyuzar)
+- Project ID: Configured in `.env`
+- Service Role Key: Configured in `.env`
+- Access Token: Configured for CLI usage
 - Status: ACTIVE_HEALTHY
 - Database: PostgreSQL 17.6.1.038
+- CLI: Installed and ready
+- ⚠️ **TODO**: Add SUPABASE_ANON_KEY for client-side app access
 
 ✅ **Stripe Access Verified**
 - Account: Socoto (acct_1SQBLEPgqpwpKROa)
 - Publishable Key: Configured in `.env`
+- Secret Key: Configured in `.env`
+- CLI: Installed and configured
 
 ## iOS Configuration
 
@@ -54,6 +61,28 @@ For production:
 - Use Xcode Cloud environment variables
 - Implement proper key rotation policies
 - Use separate credentials for dev/staging/production
+
+## CLI Tools
+
+### Stripe CLI
+- **Version**: 1.21.8
+- **Location**: `~/.local/bin/stripe`
+- **Configuration**: `~/.config/stripe/config.toml`
+- **Usage**:
+  ```bash
+  stripe customers list
+  stripe listen --forward-to localhost:3000/webhook
+  ```
+
+### Supabase CLI
+- **Version**: 2.54.11
+- **Location**: `~/.local/bin/supabase`
+- **Usage**:
+  ```bash
+  export SUPABASE_ACCESS_TOKEN=<your_token>
+  supabase link --project-ref vvxtxhmcbmordfmyuzar
+  supabase db pull
+  ```
 
 ## Security Notes
 
