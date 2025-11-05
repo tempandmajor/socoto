@@ -29,6 +29,7 @@ enum Config {
         static let url: String = getEnvVar("SUPABASE_URL")
         static let anonKey: String = getEnvVar("SUPABASE_ANON_KEY")
         static let serviceRoleKey: String = getEnvVar("SUPABASE_SERVICE_ROLE_KEY")
+        static let dbPassword: String = getEnvVar("SUPABASE_DB_PASSWORD")
     }
 
     // MARK: - Stripe Configuration
