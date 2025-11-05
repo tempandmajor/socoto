@@ -2,16 +2,42 @@
 .env
 .env.local
 .env.*.local
+.env.development
+.env.production
+.env.staging
 credentials.json
 config/secrets.json
+secrets/
 *.pem
 *.key
 *.p12
 *.mobileprovision
 
+# Credential Management System
+.socoto/
+**/*.env
+!**/*.env.template
+!**/*.env.example
+credentials/
+backups/
+
 # AWS
 .aws/
 aws-credentials.json
+
+# Supabase
+.supabase/
+supabase/.temp/
+
+# Stripe
+.stripe/
+stripe-config.json
+
+# API Keys and Tokens
+*_secret_key*
+*_api_key*
+*_access_token*
+*service_account*.json
 
 # Xcode
 #
