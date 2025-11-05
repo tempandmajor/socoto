@@ -13,6 +13,9 @@ config/secrets.json
 .aws/
 aws-credentials.json
 
+# Supabase CLI
+supabase/
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
